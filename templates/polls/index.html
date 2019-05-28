@@ -1,0 +1,34 @@
+{%extends 'base.html'%}
+{%block titulo%}Polls{%endblock titulo%}
+{% block contenido %}
+	<h1>Lista de preguntas</h1>
+	<div class="container">
+	<a href="{% url 'polls:pregunta_create' %}" class="btn btn-info">Crear pregunta</a>
+		<div class="row">
+			<div class="col">
+				<table class="table">
+					<thead>
+						<tr>
+							<th>#</th>
+							<th>Nombre</th>
+							<th>Fecha de creación</th>
+					         <th>Editar</th>
+					         <th>Eliminar</th>
+						</tr>
+					</thead>
+					<tbody> <!-- Con todo lo siguiente hacemos que nos de todos los datos que trajo en el array de preguntas (lo hicimos en el view [context_object_name]) -->
+						{%for pregunta in preguntas%}
+						<tr>
+							<th>{{ pregunta.id }}</th>
+							<td><a href="{% url 'polls:detalle' pregunta.id %}">{{ pregunta.titulo|upper }}</a></td>
+							<td>{{ pregunta.creacion|date:"d - m - Y" }}</td>
+	                        <td><a href="{% url 'polls:pregunta_update' pregunta.id %}">Editar</a></td>
+	                        <td><a href="{% url 'polls:pregunta_delete' pregunta.id %}">Eliminar</a></td>     
+						</tr>
+						{%endfor%}
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+{% endblock contenido %}

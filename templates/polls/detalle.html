@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block titulo %}Pregunta: {{ pregunta.id }} {% endblock titulo %}
+{% block contenido %}
+<div class="container">
+	<div class="row">
+		<div class="col">
+			<p>Titulo: {{ pregunta.titulo }}</p>
+			<p>Fecha: {{ pregunta.fecha }}</p>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col">
+			<ul>
+				{% for p in pregunta.opcion_set.all %}
+					<li>{{ p.titulo }} - votos: {{ p.votos }}</li>
+				{% endfor %}
+			</ul>
+		</div>
+	</div>
+</div>
+{% endblock contenido %}
